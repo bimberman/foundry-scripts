@@ -1,7 +1,9 @@
 # Foundry Scripts
 
-These are the macros my players use in game. Feel free to message me with suggestions for better implementations. 
+These are the macros my players use in game and I'm always open to suggestions for better implementations.
+
 If you need to contact me, hit me up on Discord Bimberman#3448 or @ me on the Foundry Discord.
+
 Special thanks to @Kekilla#7036, @Kandashi (He/Him)#6698, @Crymic#9452, and the entire community for helping me along the way.
 
 ## Modules used
