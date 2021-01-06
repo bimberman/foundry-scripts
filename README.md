@@ -17,7 +17,7 @@ I will try to update specific folders with videos of usage.
 Please refer to the <a href="https://foundryvtt.com/article/macros/" target="_blank">foundry docs.</a>
 
 ## Preview
-![Live demo](https://raw.githubusercontent.com/bimberman/om/master/live-demo.gif)
+![Example Demo](https://raw.githubusercontent.com/bimberman/foundry-scripts/main/Classes/Paladin/lay-on-hands-demo.gif)
 
 ## Development
 
