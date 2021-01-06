@@ -14,7 +14,7 @@ I will try to update specific folders with videos of usage.
 
 ## Macro
 
-Please refer to the ![foundry docs](https://foundryvtt.com/article/macros/)
+Please refer to the <a href="https://foundryvtt.com/article/macros/" target="_blank">foundry docs.</a>
 
 ## Preview
 ![Live demo](https://raw.githubusercontent.com/bimberman/om/master/live-demo.gif)
