@@ -1,5 +1,3 @@
-// Requires GM macro Cub_Condition (Midi-qol and CUB). https://gitlab.com/crymic/foundry-vtt-macros/-/tree/master/Callback%20Macros
-// Requires Item Macro and On Use within Midi-qol, in the item details at the bottom enter "ItemMacro"
 // This script was adapted from Crymic's script that can be found here: https://gitlab.com/crymic/foundry-vtt-macros/-/blob/master/5e/Classes/Paladin/Core-Lay%20on%20Hands.js
 let actorUpdate = game.macros.getName("ActorUpdate");
 let healingEffect = game.macros.getName("HealingEffect");
