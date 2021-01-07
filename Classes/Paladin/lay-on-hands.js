@@ -1,6 +1,8 @@
 // Requires GM macro Cub_Condition (Midi-qol and CUB). https://gitlab.com/crymic/foundry-vtt-macros/-/tree/master/Callback%20Macros
 // Requires Item Macro and On Use within Midi-qol, in the item details at the bottom enter "ItemMacro"
 // This script was adapted from Crymic's script that can be found here: https://gitlab.com/crymic/foundry-vtt-macros/-/blob/master/5e/Classes/Paladin/Core-Lay%20on%20Hands.js
+let actorUpdate = game.macros.getName("ActorUpdate");
+let healingEffect = game.macros.getName("HealingEffect");
 let target = Array.from(game.user.targets)[0];
 let illegal = ["undead", "construct"].some(type => (target.actor.data.data.details.type || "").toLowerCase().includes(type));
 let actorD = actor || canvas.tokens.controlled[0].actor || game.user.character;
@@ -43,12 +45,13 @@ function loh_cure() {
           label: 'Cure!',
           callback: (html) => {
             let element = html.find('#element').val();
-            itemD.update({ "data.uses.value": curtRes - 5});
+            itemD.update({ "data.uses.value": curtRes - 5 });
             ChatMessage.create({
               user: game.user._id,
               speaker: ChatMessage.getSpeaker({ actor: actorD.name }),
               content: `${actorD.name} cures ${target.name} of 1 ${element} condition.`
             });
+            healingEffect.execute(target, "cure");
           }
         }
       }
@@ -68,45 +71,17 @@ function loh_heal() {
           if (number < 1 || number > maxHealz) {
             return ui.notifications.warn(`Invalid number of charges entered = ${number}. Aborting action.`);
           } else {
-            itemD.update({ "data.uses.value": curtRes - number});
-            target.actor.update({ "data.attributes.hp.value": target.actor.data.data.attributes.hp.value + number });
+            itemD.update({ "data.uses.value": curtRes - number });
+            actorUpdate.execute(target.id, ({ "data.attributes.hp.value": target.actor.data.data.attributes.hp.value + number }));
             ChatMessage.create({
               user: game.user._id,
               speaker: ChatMessage.getSpeaker({ actor: actorD.name }),
               content: `${actorD.name} heals ${target.name} for ${number} Hit Points.`
             });
+            healingEffect.execute(target, "heal");
           }
         }
       }
     }
   }).render(true);
 }
-
-/// Ensures the user has only 1 token targeted.
-
-if (game.user.targets.size !== 1) return ui.notifications.warn(`Single Target Please`);
-
-let mainTarget = Array.from(game.user.targets)[0];
-let halfGrid = canvas.scene.data.grid / 2;
-let tarX = (mainTarget.data.x + (mainTarget.data.width * halfGrid));
-let tarY = (mainTarget.data.y + (mainTarget.data.height * halfGrid));
-let tarScale = ((mainTarget.data.width + mainTarget.data.height) / 2);
-let spellAnim =
-{
-  file: "modules/JB2A_DnD5e/Library/Generic/Healing/HealingAbility_01_Green_200x200.webm",
-  position: {
-    x: tarX,
-    y: tarY
-  },
-  anchor: {
-    x: 0.5,
-    y: 0.5
-  },
-  angle: 0,
-  scale: {
-    x: tarScale,
-    y: tarScale
-  }
-};
-canvas.fxmaster.playVideo(spellAnim);
-game.socket.emit('module.fxmaster', spellAnim);
