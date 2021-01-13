@@ -32,6 +32,8 @@ function loh_cure() {
   }
   if (selectOptions === "") {
     return ui.notifications.warn(`There's nothing to Cure on ${target.name}.`);
+  } else if (curtRes < 5) {
+    return ui.notifications.warn(`You do not have enough of the required resource.`);
   } else {
     let content_cure = `<p><em>${actorD.name} Lays on Hands on ${target.name}.</em></p><p>Choose a Condition Cure | [${curtResRnd}/${maxResRnd}] charges left.</p><form class="flexcol"><div class="form-group"><select id="element">${selectOptions}</select></div></form>`;
     new Dialog({
@@ -49,7 +51,7 @@ function loh_cure() {
               speaker: ChatMessage.getSpeaker({ actor: actorD.name }),
               content: `${actorD.name} cures ${target.name} of 1 ${element} condition.`
             });
-            healingEffect.execute(target, "cure");
+            healingEffect.execute(target, "yellow");
           }
         }
       }
@@ -76,7 +78,7 @@ function loh_heal() {
               speaker: ChatMessage.getSpeaker({ actor: actorD.name }),
               content: `${actorD.name} heals ${target.name} for ${number} Hit Points.`
             });
-            healingEffect.execute(target, "heal");
+            healingEffect.execute(target, "green");
           }
         }
       }

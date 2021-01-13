@@ -1,7 +1,6 @@
 // This script was developed with assistance from Crymic
 let target = args[0];
-let effect = args[1] === "heal" ? "modules/JB2A_DnD5e/Library/Generic/Healing/HealingAbility_01_Green_200x200.webm" :
-  "modules/JB2A_DnD5e/Library/Generic/Healing/HealingAbility_01_Yellow_200x200.webm";
+let effect = `modules/JB2A_DnD5e/Library/Generic/Healing/HealingAbility_01_${args[1]}_200x200.webm`;
 let mainTarget = target;
 let halfGrid = canvas.scene.data.grid / 2;
 let tarX = (mainTarget.data.x + (mainTarget.data.width * halfGrid));
