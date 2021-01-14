@@ -12,6 +12,7 @@ let maxHealz = Math.clamped(itemD.data.data.uses.value, 0, target.actor.data.dat
 if (!target) return ui.notifications.error(`Please select a single target.`);
 if (illegal) return ui.notifications.error(`You cannot use Lay on Hands on this target.`);
 if (curtRes === null) return ui.notifications.warn(`You are out of the required resources.`);
+if (curtRes === 0) return ui.notifications.warn(`You have 0 lay on hand resource points remaining.`);
 let content_loh = `<p>Which <strong>Action</strong> would you like to do? [${curtRes}] points remaining.</p>`;
 new Dialog({
   title: "Lay on Hands",
@@ -33,7 +34,7 @@ function loh_cure() {
   if (selectOptions === "") {
     return ui.notifications.warn(`There's nothing to Cure on ${target.name}.`);
   } else if (curtRes < 5) {
-    return ui.notifications.warn(`You do not have enough of the required resource.`);
+    return ui.notifications.warn(`You have less than 5 lay on hand resource points remaining.`);
   } else {
     let content_cure = `<p><em>${actorD.name} Lays on Hands on ${target.name}.</em></p><p>Choose a Condition Cure | [${curtResRnd}/${maxResRnd}] charges left.</p><form class="flexcol"><div class="form-group"><select id="element">${selectOptions}</select></div></form>`;
     new Dialog({
